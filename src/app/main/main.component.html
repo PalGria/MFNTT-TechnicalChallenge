@@ -1,0 +1,23 @@
+<mat-drawer-container class="example-container" autosize>
+    <app-toolbar (toggleSideNav)="toggleSideNav(drawer)"></app-toolbar>
+
+    <!-- Router here Home and contacts -->
+    <router-outlet></router-outlet>
+
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+
+        <mat-list>
+            <mat-list-item>
+                <mat-icon mat-list-icon>home</mat-icon>
+                <div mat-line> <a routerLink="/home">Home</a></div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>face</mat-icon>
+                <div mat-line> <a routerLink="/contacts">Contacts</a></div>
+            </mat-list-item>
+        </mat-list>
+
+
+
+    </mat-drawer>
+</mat-drawer-container>
