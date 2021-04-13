@@ -1,11 +1,9 @@
-
-
 <mat-list>
     <h3 mat-subheader>Contacts</h3>
-    <div mat-subheader>You have {{contacts.contacts.length ? contacts.contacts.length : 0}} contact{{contacts.contacts.length >1 ? 's' : ''}}</div>
+    <div mat-subheader>You have {{contacts.length ? contacts.length : 0}} contact{{contacts.length >1 ? 's' : ''}}</div>
 
-    <mat-list-item *ngFor="let contact of contacts.contacts" >
-        <img matListAvatar src="{{contact.avatar ? contact.avatar : 'https://i.imgur.com/tdi3NGa.png'}}" >
+    <mat-list-item *ngFor="let contact of contacts" (click)="goDetail(contact)">
+        <img matListAvatar src="{{contact.avatar ? contact.avatar : 'https://i.imgur.com/tdi3NGa.png'}}">
 
         <div mat-line> {{contact.first_name}} {{contact.last_name}}</div>
     </mat-list-item>
@@ -13,9 +11,9 @@
 </mat-list>
 <form class="example-form">
     <mat-form-field class="example-full-width">
-      <mat-label>New Contact</mat-label>
-      <input matInput placeholder="" value="" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+        <mat-label>New Contact</mat-label>
+        <input matInput placeholder="" value="" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     <mat-icon mat-list-icon class="addContact" (click)="addContact()">add_circle_outline</mat-icon>
 
-  </form>
+</form>

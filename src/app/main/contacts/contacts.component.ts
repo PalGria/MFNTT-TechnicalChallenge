@@ -1,134 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { ContactService } from '../shared/services/contact.service'
+import { Contact } from '../shared/models/contact.model'
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contacts = {
-    "contacts": [
-      {
-        "id": 1,
-        "first_name": "Aloy",
-        "last_name": "Sobeck",
-        "avatar": "https://pbs.twimg.com/profile_images/862284388012367872/sBzixGdN.jpg"
-      },
-      {
-        "id": 2,
-        "first_name": "Edward",
-        "last_name": "Kenway",
-        "avatar": "https://pbs.twimg.com/profile_images/490623209822105600/1JHdK9lS.jpeg"
-      },
-      {
-        "id": 3,
-        "first_name": "Nathan",
-        "last_name": "Drake",
-        "avatar": "https://pbs.twimg.com/profile_images/630503477748195328/GWKlmRm-.jpg"
-      },
-      {
-        "avatar": "https://handmade.network/static/light/empty-avatar.svg",
-        "first_name": "John",
-        "last_name": "Doe",
-        "id": 4
-      }
-    ],
-    "addresses": [
-      {
-        "street1": "Queen Anne's",
-        "street2": "Bloomsbury",
-        "town": "London",
-        "country": "GB",
-        "contactId": "2",
-        "id": 1
-      }
-    ],
-    "countries": [
-      {
-        "iso2": "DE",
-        "name": "Germany"
-      },
-      {
-        "iso2": "AT",
-        "name": "Austria"
-      },
-      {
-        "iso2": "CH",
-        "name": "Switzerland"
-      },
-      {
-        "iso2": "NL",
-        "name": "Netherlands"
-      },
-      {
-        "iso2": "GB",
-        "name": "United Kingdom"
-      },
-      {
-        "iso2": "BE",
-        "name": "Belgium"
-      },
-      {
-        "iso2": "CZ",
-        "name": "Czech Republic"
-      },
-      {
-        "iso2": "HU",
-        "name": "Hungary"
-      },
-      {
-        "iso2": "SI",
-        "name": "Slovenia"
-      },
-      {
-        "iso2": "FR",
-        "name": "France"
-      },
-      {
-        "iso2": "IT",
-        "name": "Italy"
-      },
-      {
-        "iso2": "PL",
-        "name": "Poland"
-      },
-      {
-        "iso2": "ES",
-        "name": "Spain"
-      }
-    ]
-  };
+
+  contacts: Contact[] = [];
   name: string = '';
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(
+    private _snackBar: MatSnackBar,
+    private router: Router,
+    public contactService: ContactService) { }
 
   ngOnInit(): void {
+    this.getContacts();
   }
+  getContacts() {
+    this.contactService.getContacts()
+      .subscribe(res => {
+        this.contacts = res as Contact[];
 
+        console.log(res);
+      })
+  }
   addContact() {
     if (this.name) {
       let name = this.name.split(" ")[0];
-      let surname = this.name.slice(0, this.name.length);
-      let contact =
+      let surname = this.name.slice(name.length + 1 , this.name.length);
+      let contact: Contact =
       {
         "avatar": "https://i.imgur.com/tdi3NGa.png",
-        "first_name": name[0],
+        "first_name": name,
         "last_name": surname,
-        "id": 4
+        "id": this.contacts.length + 1
       };
-      console.log(this.contacts.contacts);
+      console.log(this.contacts); //TODO REMOVE
 
+      this.contactService.addContact(contact).subscribe(res => {
+        this.getContacts(); 
+      });
 
-
-      this.contacts.contacts.push(contact);
+      //this.contacts.push(contact);
     }
     else {
       this.openSnackBar();
     }
   }
+  goDetail(contact) {
+
+    console.log("navigate to detail?");
+    this.router.navigate(['/detail', { id: contact.id }]);
+  }
+
   openSnackBar() {
-    this._snackBar.open('Something went wrong. Try again.', '',{ duration:  2000, panelClass: ['mat-toolbar', 'mat-warn'] });
+    this._snackBar.open('Something went wrong. Try again.', '', { duration: 2000, panelClass: ['mat-toolbar', 'mat-warn'] });
 
   }
+
 }

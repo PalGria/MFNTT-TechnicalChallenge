@@ -17,8 +17,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 import { FormsModule } from '@angular/forms';
+import { DetailComponent } from './main/detail/detail.component';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     ToolbarComponent,
     HomeComponent,
     ContactsComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
+    MatSelectModule,
+    HttpClientModule,
 
 
   ],

@@ -1,0 +1,42 @@
+.back-button-container {
+    z-index: 5;
+    position: fixed;
+    display: flex;
+    align-self: flex-end;
+    bottom: 10%;
+    margin-bottom: 40px;
+    right: 10%;
+}
+
+button {
+    margin-right: 14px;
+}
+
+.avatar {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+header {
+    display: flex;
+    margin: 20px;
+}
+
+header h2 {
+    padding-left: 20px;
+}
+
+section {
+    margin: 20px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+form h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
