@@ -5,37 +5,51 @@
 </header>
 
 <section>
-    <form action="">
-        <h4>Address #1</h4>
+    <form action="" *ngFor="let address of addresses;let i = index" #address1="ngForm">
+        <div class="form-header">
+            <h4>Address #{{i+1}}</h4>
+            <mat-icon mat-list-icon (click)="deleteAddress(address) ">close</mat-icon>
+        </div>
+
         <p>
             <mat-form-field>
                 <mat-label>Street 1</mat-label>
-                <input matInput>
+
+                <input matInput [(ngModel)]="address.street1" name="street1">
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
                 <mat-label>Street 2</mat-label>
-                <input matInput>
+
+                <input matInput [(ngModel)]="address.street2" name="street2">
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
                 <mat-label>Town</mat-label>
-                <input matInput>
+
+                <input matInput [(ngModel)]="address.town" name="town">
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
                 <mat-label>Country</mat-label>
-                <mat-select>
-                    <mat-option value="one">First option</mat-option>
-                    <mat-option value="two">Second option</mat-option>
+
+                <mat-select [(ngModel)]="address.country" name="country">
+                    <mat-option *ngFor="let country of countries" [value]="country.iso2">{{country.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </p>
 
     </form>
+    <button mat-raised-button (click)="addAddress()">
+      <mat-icon mat-list-icon>add</mat-icon> <span>Add address</span>
+    </button>
+    <button mat-raised-button (click)="onSubmit()">
+      <mat-icon mat-list-icon>save</mat-icon> <span>Save</span>
+    </button>
+
 </section>
 
 <div class="back-button-container">

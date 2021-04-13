@@ -38,5 +38,35 @@ p {
 
 form h4 {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 5px;
+}
+
+.form-header {
+    display: flex;
+}
+
+.form-header mat-icon {
+    font-size: large;
+    padding-left: 5px;
+}
+
+.form-header mat-icon {
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+}
+
+.form-header mat-icon:hover {
+    color: grey;
+    cursor: pointer;
+}
+
+.form-header mat-icon:active {
+    color: grey;
+    transform: translateY(2px);
 }
